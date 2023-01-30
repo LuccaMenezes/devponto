@@ -1,8 +1,10 @@
 const User = require('../models/User')
 
+const bcrypt = require('bcrypt')
+
 module.exports = class UserController {
    static async register(req, res) {      
-      const { nome, email, senha, confirmpassword, phone } = req.body
+      const { nome, email, senha, confirmpassword, phone, empresa, cargahoraria } = req.body
 
       //validations
       if(!nome) {
@@ -18,11 +20,19 @@ module.exports = class UserController {
          return
       }
       if(!confirmpassword) {
-         res.status(422).json({message: 'A confirmação da senha é obrigatória' })
+         res.status(422).json({message: 'A confirmação de senha é obrigatória' })
          return
       }
       if(!phone) {
          res.status(422).json({message: 'O telefone é obrigatório' })
+         return
+      }
+      if(!empresa) {
+         res.status(422).json({message: 'O nome da empresa é obrigatória' })
+         return
+      }
+      if(!cargahoraria) {
+         res.status(422).json({message: 'Informe a Carga horaria do funcionário' })
          return
       }
 
@@ -33,5 +43,33 @@ module.exports = class UserController {
 
       //check if user exists
       const userExists = await User.findOne({email: email})
+
+      if(userExists) {
+         res.status(422).json({
+            message: 'E-mail já cadastrado',
+         })
+         return
+      }
+
+      //create a password
+      const salt = await bcrypt.genSalt(12)
+      const passwordHash = await bcrypt.hash(senha, salt)
+
+      //create a user
+      const user = new User({
+         nome,
+         email,
+         phone,
+         senha: passwordHash,
+         empresa,
+         cargahoraria,
+      })
+
+      try {        
+         const newUser = await user.save()
+         res.status(201).json({message: 'Usuário criado com sucesso!', newUser, })
+      } catch (error) {
+         res.status(500).json({message: error})
+      }
    }
 }
