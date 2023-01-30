@@ -35,9 +35,7 @@ const Control = mongoose.model(
       saldohorasdia: {
          type: Date,
          required: true
-      },
-      nome: Object,
-      cargahoraria: Object   
+      }, 
       },
       { timestamps: true },
    ),
