@@ -178,18 +178,40 @@ module.exports = class UserController {
 
       user.email = email
 
-      if(!senha) {
-         res.status(422).json({message: 'A senha é obrigatória' })
+      if(senha != confirmpassword) {
+         res.status(422).json({message: 'As senhas devem ser iguais' })
+         return
+      } else if (senha === confirmpassword && senha != null) {      
+      //create a password
+      const salt = await bcrypt.genSalt(12)
+      const passwordHash = await bcrypt.hash(senha, salt)
+
+      user.senha = passwordHash
+      }
+
+      try {
+         
+         await User.findOneAndUpdate(
+            {_id: user.id},
+            {$set: user},
+            {new: true},
+         )
+
+         res.status(200).json({message: 'Usuário atualizado com sucesso!'})
+
+      } catch (err) {
+         
+         res.status(500).json({message: err})
          return
       }
-      if(!confirmpassword) {
-         res.status(422).json({message: 'A confirmação de senha é obrigatória' })
-         return
-      }
+      
       if(!phone) {
          res.status(422).json({message: 'O telefone é obrigatório' })
          return
       }
+
+      user.phone = phone
+
       if(!empresa) {
          res.status(422).json({message: 'O nome da empresa é obrigatória' })
          return
