@@ -38,4 +38,26 @@ module.exports = class ControlController {
          res.status(500).json({message: error})
       }
    }
+
+   static async getAll(req, res) {
+
+      const pets = await Control.find().sort('-createdAt')
+
+      res.status(200).json({
+         pets: pets,
+      })
+   }
+
+   static async getAllUserControl(req, res) {
+
+      // get user from token
+      const token = getToken(req)
+      const user = await getUserByToken(token)
+
+      const control = await Control.find({'user._id': user._id}).sort('-createdAt')
+
+      res.status(200).json({ 
+         control,
+      })
+   }
 }

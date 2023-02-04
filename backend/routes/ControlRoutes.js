@@ -6,5 +6,7 @@ const ControlController = require('../controllers/ControlController')
 const verifyToken = require('../helpers/verify-token')
 
 router.post('/create', verifyToken,  ControlController.create)
+router.get('/ponto', verifyToken, ControlController.getAll)
+router.get('/myponto', verifyToken, ControlController.getAllUserControl)
 
 module.exports = router
