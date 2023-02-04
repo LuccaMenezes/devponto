@@ -5,7 +5,7 @@ const Control = mongoose.model(
    'Control',
    new Schema({
       data: {
-         type: Date,
+         type: String,
          required: true
       },
       diasemana: {
@@ -13,29 +13,24 @@ const Control = mongoose.model(
          required: true
       },
       marc1: {
-         type: Date,
-         required: true
+         type: Date
       },  
       marc2: {
-         type: Date,
-         required: true
+         type: Date
       }, 
       marc3: {
-         type: Date,
-         required: true
+         type: Date
       }, 
       marc4: {
-         type: Date,
-         required: true
+         type: Date
       }, 
       totalhoras: {
-         type: Date,
-         required: true
+         type: Date
       },  
       saldohorasdia: {
-         type: Date,
-         required: true
+         type: Date
       }, 
+      user: Object,
       },
       { timestamps: true },
    ),
