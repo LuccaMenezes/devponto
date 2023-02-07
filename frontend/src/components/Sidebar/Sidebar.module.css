@@ -1,0 +1,38 @@
+:root {
+  --header-height: 3rem;
+  --nav-widht: 68px;
+
+  --first-color: #f10086;
+  --first-color-alt: #f582a7;
+  --white-color: #ffddee;
+}
+
+a {
+  text-decoration: none;
+}
+
+ul {
+  list-style: none;
+}
+
+main {
+  position: relative;
+  margin: var(--header-height) 0 0 0;
+  padding: 0 1rem;
+  font-size: 1rem;
+  transition: 0.5s;
+}
+.header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: var(--header-height);
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: var(--white-color);
+  padding: 0 1rem;
+  transition: .5s;
+}
+
