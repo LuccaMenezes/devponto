@@ -1,16 +1,26 @@
 import { Outlet } from 'react-router-dom';
-import Footer from './components/Footer/Footer';
+
+import { useState} from 'react';
 import Sidebar from './components/Sidebar/Sidebar';
 
 
-function App() {
+
+const App = () => {
+
+  const [sidebarOpen, setSidebarOpen] = useState(false);
+  const openSidebar = () => {
+    setSidebarOpen(true);
+  };
+  const closeSidebar = () => {
+    setSidebarOpen(false);
+  }
+
   return (
-    <div className="App">
-      <Sidebar />
+    <div>
+      <Sidebar sidebarOpen={sidebarOpen} closeSidebar={closeSidebar} />
       <Outlet />
-      <Footer />
     </div>
-  );
+  )
 }
 
-export default App;
+export default App

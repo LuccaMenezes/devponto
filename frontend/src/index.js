@@ -9,6 +9,10 @@ import Login from './pages/Auth/Login';
 import Register from './pages/Auth/Register';
 import Home from './pages/Home';
 import ErrorPage from './pages/ErrorPage/ErrorPage';
+import Frequencia from './pages/Frequencia/Frequencia';
+import Espelho from './pages/Espelho/Espelho';
+import User from './pages/User/User';
+
 
 const router = createBrowserRouter([
   {
@@ -26,6 +30,18 @@ const router = createBrowserRouter([
       {
         path: "/register",
         element: <Register />
+      },
+      {
+        path: "/frequencia",
+        element: <Frequencia />
+      },
+      {
+        path: "/espelho",
+        element: <Espelho />
+      },
+      {
+        path: "/user",
+        element: <User />
       }
     ]
   },

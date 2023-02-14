@@ -1,50 +1,50 @@
-import React from 'react'
-import styles from './Sidebar.module.css'
+import './Sidebar.css'
+import logo from '../../assets/img/devPonto.png'
 import { Link } from 'react-router-dom'
 
-const Sidebar = () => {
-  return (
-    <main>
-      <header className={styles.header}>
-         <div className="header-toggle">
-            <i class='fas fa-bars'></i>
-         </div>
-      </header>
-
-      <aside className="sidebar">
-         <nav className="nav">
-            <div>
-               <Link to="/" className="nav-link">
-                  <i className="fa-solid fa-clock nav-link-icon"></i>
-                  <span className="nav-link-name">Marcar Ponto</span>
-               </Link>
-               
-               <div className="nav-list">
-               <Link to="/login" className="nav-link">
-                  <i className="fa-solid fa-user-clock nav-link-icon"></i>
-                  <span className="nav-link-name">Frequência</span> 
-               </Link>
-               <Link to="/login" className="nav-link">
-                  <i className="fa-solid fa-book nav-link-icon"></i>
-                  <span className="nav-link-name">Espelho</span> 
-               </Link>
-               <Link to="/login" className="nav-link">
-                  <i className="fa-solid fa-user nav-link-icon"></i>
-                  <span className="nav-link-name">Usuário</span> 
-               </Link>
-               </div>
+const Sidebar = ({ sidebarOpen, closeSidebar }) => {
+   return (
+      <div className={sidebarOpen ? "sidebar-responsive" : ""} id="sidebar">
+         <div className="sidebar__title">
+            <div className="sidebar__img">
+               <img src={logo} alt="logo" />
+               <h1>Dev Ponto</h1>
             </div>
 
-            <Link to="/login" className="nav-link">
-                  <i className="fa-solid fa-sign-out nav-link-icon"></i>
-                  <span className="nav-link-name">Sair</span> 
-               </Link> 
-         </nav>
-      </aside>
+            <i
+            onClick={() => closeSidebar()}
+            className="fa fa-times"
+            id="sidebarIcon"
+            aria-hidden="true"
+            ></i>
+         </div>
+         <div className="sidebar__menu">
+            <div className="sidebar__link active_menu_link">
+               <i className="fa fa-clock"></i>
+               <Link to={"/"}> Marcar Ponto</Link>
+            </div>
+            <h2>Ponto</h2>
+            <div className="sidebar__link">
+               <i className="fa fa-tachometer"></i>
+               <Link to={"frequencia"}>Frequência</Link>
+            </div>
+            <div className="sidebar__link">
+               <i className="fa fa-book"></i>
+               <Link to={"espelho"}>Espelho</Link>
+            </div>
+            <div className="sidebar__link">
+               <i className="fa fa-user"></i>
+               <Link to={"user"}>Usuário</Link>
+            </div>
+            <div className="sidebar__link">
+               <i className="fa fa-sign-out"></i>
+               <Link to={"frequencia"}>Sair</Link>
+            </div>
+         </div>
 
-      <h1>Content</h1>
-    </main>
-  )
+      </div>
+   )
 }
+
 
 export default Sidebar
