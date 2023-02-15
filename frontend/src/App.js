@@ -2,6 +2,7 @@ import { Outlet } from 'react-router-dom';
 
 import { useState} from 'react';
 import Sidebar from './components/Sidebar/Sidebar';
+import Navbar from './components/navbar/Navbar';
 
 
 
@@ -17,6 +18,7 @@ const App = () => {
 
   return (
     <div>
+      <Navbar sidebarOpen={sidebarOpen} openSidebar={openSidebar} />
       <Sidebar sidebarOpen={sidebarOpen} closeSidebar={closeSidebar} />
       <Outlet />
     </div>
